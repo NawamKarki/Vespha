@@ -41,7 +41,7 @@ public class trigger4 : MonoBehaviour
         {
             timer += Time.deltaTime;
             //Debug.Log(timer);
-            if (timer >= 5)
+            if (timer >= 3)
             {
                 if (value.text == "YES")
                 {
