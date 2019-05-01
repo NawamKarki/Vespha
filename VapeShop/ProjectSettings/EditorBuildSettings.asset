@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Pub.unity
+    path: Assets/Scenes/Cafe.unity
     guid: bdd70f0e2bb717b4194ba71bc73b9bda
   - enabled: 1
     path: Assets/Scenes/VapingActivity.unity

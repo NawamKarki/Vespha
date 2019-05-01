@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class trigger4 : MonoBehaviour
 {
@@ -15,10 +16,14 @@ public class trigger4 : MonoBehaviour
 
     private bool changeScene;
 
+    private string participantNo;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        //Finding the Participant Number
+        //participantNo = GameObject.Find("Participant_No_Trigger_doorFront").GetComponent<greetCustomer>().ParticipantNumber;
+        //Debug.Log(participantNo);
     }
 
     // Update is called once per frame
@@ -98,9 +103,16 @@ public class trigger4 : MonoBehaviour
         if (other.gameObject.tag == "MainCamera")
         {
             Debug.Log("Gone");
+            addValue(value.text);
             //Destroy(question);
             notice.SetActive(false);
             enterCountdown = false;
         }
+    }
+
+    private void addValue(string dial)
+    {
+        string path = Application.dataPath + "/dialdata";
+        File.AppendAllText(path + "/participant" + participantNo + ".csv", "\n" + dial);
     }
 }

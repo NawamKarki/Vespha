@@ -81,15 +81,15 @@ public class arduino : MonoBehaviour
 
         if (!File.Exists(path))
         {
-            File.WriteAllText(path + "/" + DateTime.Today.ToString("yyyyMMddhhmmss") + ".csv", "");
+            File.WriteAllText(path + "/" + DateTime.Today.ToString("yyyyMMddhh") + ".csv", "");
         }  
     }
 
-    //Appends the file with new inhaling data
+    //Add the new inhaling data in the file
     private void addTxt(int data)
     {
         path = Application.dataPath;
-        File.AppendAllText(path + "/" + "new.csv", "\n" + data);
+        File.AppendAllText(path + "/" + DateTime.Today.ToString("yyyyMMddhh") + ".csv", "\n" + data);
         Debug.Log("Saved");
         vapingData = 0;
     }
