@@ -14,10 +14,22 @@ public class outdoor_script : MonoBehaviour
     private float timer;
     private bool enterCountdown;
 
+    private string path;
+    private long count;
+
+    //Name of the folder to store files
+    string folderName = DateTime.Now.ToString("yyyy-MM-dd");
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Sets the path for the game up to the Assets folder
+        path = Application.dataPath;
+
+        //Checks to see the amount of files in the folder
+        count = DirCount(new DirectoryInfo(path + "/" + folderName));
+
+
     }
 
     // Update is called once per frame
@@ -34,6 +46,20 @@ public class outdoor_script : MonoBehaviour
             }
         }
     }
+
+    public static long DirCount(DirectoryInfo d)
+    {
+        long i = 0;
+        // Add file sizes
+        FileInfo[] fis = d.GetFiles();
+        foreach (FileInfo fi in fis)
+        {
+            if (fi.Extension.Contains("csv"))
+                i++;
+        }
+        return i;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -75,7 +101,7 @@ public class outdoor_script : MonoBehaviour
 
     private void addValue(string dial)
     {
-        string path = Application.dataPath + "/dialdata";
-        //File.AppendAllText(path + "/participant" + participantNo + ".csv", "\n" + dial);
+        //string path = Application.dataPath + "/" + folderName;
+        File.AppendAllText(path + "/" + folderName + "/participant " + count + ".csv", "\n" + dial);
     }
 }

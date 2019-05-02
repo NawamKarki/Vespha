@@ -111,8 +111,7 @@ public class greetCustomer : MonoBehaviour
 
 
 
-        //Checks to see the amount of files in the Dialdata folder
-        count = DirCount(new DirectoryInfo(path + "/" + folderName));
+        
 
         //Creates the directory if needed
         if (checkDirectory(folderName) == false)
@@ -120,6 +119,8 @@ public class greetCustomer : MonoBehaviour
             createDirectory(folderName);
         }
 
+        //Checks to see the amount of files in the Dialdata folder
+        count = DirCount(new DirectoryInfo(path + "/" + folderName));
 
         //creates the new csv file and names it based on the amount of existing files
         if (checkFile(folderName +"participant " + count + ".csv") == false)
