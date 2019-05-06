@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 
+//This script creates dated folders and files for each participant
+
 public class mainScript : MonoBehaviour
 {
 

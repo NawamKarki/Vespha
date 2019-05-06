@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.IO;
 
 public class greetIndoor : MonoBehaviour
 {
@@ -11,7 +14,7 @@ public class greetIndoor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        receptionist_talk = receptionist.GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -24,10 +27,12 @@ public class greetIndoor : MonoBehaviour
     {
         if (other.gameObject.tag == "MainCamera")
         {
-            //enterCountdown = true;
+            Debug.Log("animate inanimate");
             //animate and make the avatar talk
-            receptionist.GetComponent<AudioSource>().Play();
-            receptionist_talk.Play("talk");
+            //receptionist.GetComponent<AudioSource>().Play();
+            receptionist_talk = receptionist.GetComponent<Animator>();
+            receptionist_talk.Play("mixamo_com");
+
         }
     }
 }

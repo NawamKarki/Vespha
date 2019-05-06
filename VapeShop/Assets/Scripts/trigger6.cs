@@ -45,20 +45,6 @@ public class trigger6 : MonoBehaviour
         }
     }
 
-    //number of files in the directory
-    public long DirCount(DirectoryInfo d)
-    {
-        long i = 0;
-        // Add file sizes
-        FileInfo[] fis = d.GetFiles();
-        foreach (FileInfo fi in fis)
-        {
-            if (fi.Extension.Contains("csv"))
-                i++;
-        }
-        return i;
-    }
-
     //When user enters the colliding box
     private void OnTriggerEnter(Collider other)
     {

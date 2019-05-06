@@ -44,19 +44,6 @@ public class trigger4 : MonoBehaviour
         }
     }
 
-    //number of files in the directory
-    private long DirCount(DirectoryInfo d)
-    {
-        long i = 0;
-        // Add file sizes
-        FileInfo[] fis = d.GetFiles();
-        foreach (FileInfo fi in fis)
-        {
-            if (fi.Extension.Contains("csv"))
-                i++;
-        }
-        return i;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
