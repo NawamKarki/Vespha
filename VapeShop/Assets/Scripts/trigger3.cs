@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
 
 public class trigger3 : MonoBehaviour
 {
     [SerializeField] GameObject notice;
     [SerializeField] Text value;
-    [SerializeField] GameObject indoor_receptionist;
-
+ 
     private int dial;
     private float timer;
     private bool enterCountdown;
-    private Animator indoor_receptionist_talk;
 
-    private string participantNo;
+    private string path;
+    private long count3;
+
+    //Name of the folder to store files
+    string folderName = DateTime.Now.ToString("yyyy-MM-dd");
 
     // Start is called before the first frame update
     void Start()
     {
-        //Finding the Participant Number
-        //participantNo = GameObject.Find("Participant_No_Trigger_doorFront").GetComponent<greetCustomer>().ParticipantNumber;
-        //Debug.Log(participantNo);
-        indoor_receptionist_talk = indoor_receptionist.GetComponent<Animator>();
+        //Sets the path for the game up to the Assets folder
+        path = Application.dataPath;  
     }
 
     // Update is called once per frame
@@ -41,13 +42,27 @@ public class trigger3 : MonoBehaviour
         }
     }
 
+    //number of files in the directory
+    private long DirCount(DirectoryInfo d)
+    {
+        long i = 0;
+        // Add file sizes
+        FileInfo[] fis = d.GetFiles();
+        foreach (FileInfo fi in fis)
+        {
+            if (fi.Extension.Contains("csv"))
+                i++;
+        }
+        return i;
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "MainCamera")
         {
+            count3 = mainScript.count;
             enterCountdown = true;
-            indoor_receptionist_talk.Play("talk_indoor");
-
         }
     }
 
@@ -83,7 +98,6 @@ public class trigger3 : MonoBehaviour
 
     private void addValue(string dial)
     {
-        string path = Application.dataPath + "/dialdata";
-        File.AppendAllText(path + "/participant" + participantNo + ".csv", "\n" + dial);
+        File.AppendAllText(path + "/" + folderName + "/participant " + count3 + ".csv", "\n" + dial);
     }
 }

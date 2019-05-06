@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.IO;
+using System;
 
 public class trigger4 : MonoBehaviour
 {
@@ -14,22 +14,24 @@ public class trigger4 : MonoBehaviour
     private float timer;
     private bool enterCountdown;
 
-    private bool changeScene;
+    private string path;
+    private long count4;
+    //private long count;
 
-    private string participantNo;
+    //Name of the folder to store files
+    string folderName = DateTime.Now.ToString("yyyy-MM-dd");
 
     // Start is called before the first frame update
     void Start()
     {
-        //Finding the Participant Number
-        //participantNo = GameObject.Find("Participant_No_Trigger_doorFront").GetComponent<greetCustomer>().ParticipantNumber;
-        //Debug.Log(participantNo);
+        //Sets the path for the game up to the Assets folder
+        path = Application.dataPath;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //display Vaping Craving question after 3 seconds
+        
         if (enterCountdown)
         {
             timer += Time.deltaTime;
@@ -40,30 +42,28 @@ public class trigger4 : MonoBehaviour
                 timer = 0;
             }
         }
-
-        //Change scene to VapingActivity
-        if (changeScene)
-        {
-            timer += Time.deltaTime;
-            //Debug.Log(timer);
-            if (timer >= 3)
-            {
-                if (value.text == "YES")
-                {
-                    SceneManager.LoadScene("VapingActivity");
-                    changeScene = false;
-                }
-                timer = 0;
-                
-            }
-        }
     }
 
-    //When user enters the colliding box
+    //number of files in the directory
+    private long DirCount(DirectoryInfo d)
+    {
+        long i = 0;
+        // Add file sizes
+        FileInfo[] fis = d.GetFiles();
+        foreach (FileInfo fi in fis)
+        {
+            if (fi.Extension.Contains("csv"))
+                i++;
+        }
+        return i;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "MainCamera")
         {
+            //get the file count value
+            count4 = mainScript.count;
             enterCountdown = true;
 
         }
@@ -74,27 +74,15 @@ public class trigger4 : MonoBehaviour
 
         if (Input.GetKeyDown("w"))
         {
-            Debug.Log("value");
+            //Debug.Log("value");
             dial += 1;
-            if (dial > 5)
-            {
-                value.text = "YES";
-                changeScene = true;
-                dial = 0;
-            }
-            //value.text = dial.ToString();
+            value.text = dial.ToString();
         }
 
         if (Input.GetKeyDown("s"))
         {
             dial -= 1;
-            if (dial < -5)
-            {
-                value.text = "NO";
-                changeScene = false; 
-                dial = 0;
-            }
-            //value.text = dial.ToString();
+            value.text = dial.ToString();
         }
     }
 
@@ -102,7 +90,6 @@ public class trigger4 : MonoBehaviour
     {
         if (other.gameObject.tag == "MainCamera")
         {
-            Debug.Log("Gone");
             addValue(value.text);
             //Destroy(question);
             notice.SetActive(false);
@@ -110,9 +97,10 @@ public class trigger4 : MonoBehaviour
         }
     }
 
+    //adds the dial value to the file
     private void addValue(string dial)
     {
-        string path = Application.dataPath + "/dialdata";
-        File.AppendAllText(path + "/participant" + participantNo + ".csv", "\n" + dial);
+        File.AppendAllText(path + "/" + folderName + "/participant " + count4 + ".csv", "\n" + dial);
+
     }
 }
