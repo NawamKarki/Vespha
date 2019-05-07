@@ -39,7 +39,7 @@ public class moveOnTrigger2 : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         //GameObject runningFemale;
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "MainCamera")
         {
             drive1.Play("drive");
             drive2.Play("drive");

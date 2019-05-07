@@ -36,7 +36,7 @@ public class moveOnTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         //GameObject runningFemale;
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "MainCamera")
         {
             Debug.Log("Camera entered Trigger");
             //runningFem.Play("JogForward");
