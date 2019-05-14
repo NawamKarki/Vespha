@@ -24,7 +24,7 @@ public class trigger3 : MonoBehaviour
     void Start()
     {
         //Sets the path for the game up to the Assets folder
-        path = Application.dataPath;  
+        path = Application.dataPath + "/Data/CravingData";  
     }
 
     // Update is called once per frame

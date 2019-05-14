@@ -32,7 +32,7 @@ public class mainScript : MonoBehaviour
     public void initialize()
     {
         //Sets the path for the game up to the Assets folder
-        path = Application.dataPath;
+        path = Application.dataPath + "/Data/CravingData";
 
         //Creates the directory if needed
         if (checkDirectory(folderName) == false)
